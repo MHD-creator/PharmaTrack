@@ -1,0 +1,29 @@
+:host { display: block; }
+
+.table-responsive { padding: 0.5rem; }
+
+/* accent ligne faible stock */
+.table-danger {
+  background: linear-gradient(90deg, rgba(255,230,230,0.85), rgba(255,245,245,0.6));
+}
+
+/* boutons */
+.btn-group .btn { min-width: 38px; }
+
+/* mobile: masquer thead, afficher en "cartes" */
+@media (max-width: 576px) {
+  .table thead { display: none; }
+  .table tbody td {
+    display: block;
+    width: 100%;
+    text-align: left;
+    border-top: none;
+    padding: .5rem 0;
+  }
+  .table tbody tr {
+    margin-bottom: .75rem;
+    border: 1px solid #f1f1f1;
+    border-radius: .5rem;
+    padding: .5rem;
+  }
+}

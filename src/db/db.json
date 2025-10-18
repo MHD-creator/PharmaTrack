@@ -1,0 +1,175 @@
+{
+  "medicaments": [
+    {
+      "id": "3",
+      "name": "Ibuprofène 400mg",
+      "category": "Anti-inflammatoire",
+      "price": 500,
+      "quantity": 10,
+      "expiryDate": "2025-12-20"
+    },
+    {
+      "id": "4",
+      "name": "Vitamine C 1000mg",
+      "category": "Complément",
+      "price": 300,
+      "quantity": 80,
+      "expiryDate": "2027-03-15"
+    },
+    {
+      "id": "6",
+      "name": "Metformine 500mg",
+      "category": "Antidiabétique",
+      "price": 600,
+      "quantity": 34,
+      "expiryDate": "2027-01-05"
+    },
+    {
+      "id": "7",
+      "name": "Oméprazole 20mg",
+      "category": "Gastro",
+      "price": 700,
+      "quantity": 15,
+      "expiryDate": "2026-09-01"
+    },
+    {
+      "id": "8",
+      "name": "Salbutamol Inhaler",
+      "category": "Respiratoire",
+      "price": 2500,
+      "quantity": 6,
+      "expiryDate": "2025-12-31"
+    },
+    {
+      "id": "9",
+      "name": "Antalgex",
+      "category": "Anti-douleur",
+      "price": 4500,
+      "quantity": 100,
+      "expiryDate": "2028-06-17"
+    }
+  ],
+  "ventes": [
+    {
+      "id": "1",
+      "medicineId": 1,
+      "quantity": 3,
+      "date": "2025-10-12T10:30:00Z",
+      "total": 600
+    },
+    {
+      "id": "2",
+      "medicineId": 2,
+      "quantity": 2,
+      "date": "2025-10-12T11:00:00Z",
+      "total": 1600
+    },
+    {
+      "id": "3",
+      "medicineId": 3,
+      "quantity": 1,
+      "date": "2025-10-12T12:00:00Z",
+      "total": 500
+    },
+    {
+      "id": "4",
+      "medicineId": 4,
+      "quantity": 5,
+      "date": "2025-10-13T09:30:00Z",
+      "total": 1500
+    },
+    {
+      "id": "5",
+      "medicineId": 5,
+      "quantity": 3,
+      "date": "2025-10-13T14:10:00Z",
+      "total": 1200
+    },
+    {
+      "id": "6",
+      "medicineId": 6,
+      "quantity": 2,
+      "date": "2025-10-14T08:45:00Z",
+      "total": 1200
+    },
+    {
+      "id": "7",
+      "medicineId": 7,
+      "quantity": 1,
+      "date": "2025-10-14T16:30:00Z",
+      "total": 700
+    },
+    {
+      "id": "8",
+      "medicineId": 8,
+      "quantity": 1,
+      "date": "2025-10-15T10:00:00Z",
+      "total": 2500
+    },
+    {
+      "id": "9",
+      "medicineId": 9,
+      "quantity": 4,
+      "date": "2025-10-15T13:20:00Z",
+      "total": 1200
+    },
+    {
+      "id": "10",
+      "medicineId": 10,
+      "quantity": 1,
+      "date": "2025-10-15T17:00:00Z",
+      "total": 1200
+    },
+    {
+      "id": "11",
+      "medicineId": 1,
+      "quantity": 2,
+      "date": "2025-10-16T09:10:00Z",
+      "total": 400
+    },
+    {
+      "id": "12",
+      "medicineId": 3,
+      "quantity": 2,
+      "date": "2025-10-16T11:40:00Z",
+      "total": 1000
+    },
+    {
+      "id": "0",
+      "medicamentId": "3",
+      "quantity": 1,
+      "date": "2025-10-17",
+      "total": 0
+    },
+    {
+      "id": "0",
+      "medicamentId": "8",
+      "quantity": 1,
+      "date": "2025-10-17",
+      "total": 0
+    },
+    {
+      "id": 0,
+      "medicamentId": "3",
+      "quantity": 1,
+      "date": "2025-10-18",
+      "total": 0
+    }
+  ],
+  "users": [
+    {
+      "id": "1",
+      "username": "admin",
+      "password": "admin123",
+      "role": "admin",
+      "token": "fake-admin-token"
+    },
+    {
+      "id": "2",
+      "username": "user",
+      "password": "user123",
+      "role": "user",
+      "token": "fake-user-token"
+    }
+  ]
+}

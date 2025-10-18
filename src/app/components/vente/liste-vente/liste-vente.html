@@ -1,0 +1,65 @@
+<!-- utilise Bootstrap pour le style -->
+<div class="container my-4">
+<div class="card shadow-sm">
+<div class="card-body">
+<div class="d-flex align-items-center justify-content-between mb-3">
+<div>
+<h4 class="card-title mb-0">Liste des ventes</h4>
+<small class="text-muted">Gestion simple des ventes</small>
+</div>
+
+
+<div class="d-flex align-items-center gap-2">
+<div class="text-end me-3">
+<div class="small text-muted">Total des ventes</div>
+<div class="h5 mb-0">{{ totalVentes | number:'1.2-2' }}</div>
+</div>
+
+
+<button class="btn btn-primary" (click)="addVente()">
+<i class="bi bi-plus-lg"></i> Ajouter vente
+</button>
+</div>
+</div>
+
+
+<div class="table-responsive">
+<table class="table table-hover align-middle">
+<thead class="table-light">
+<tr>
+<th>#</th>
+<th>Médicament ID</th>
+<th>Quantité</th>
+<th>Date</th>
+<th class="text-end">Total</th>
+<th class="text-center">Actions</th>
+</tr>
+</thead>
+<tbody>
+<tr *ngFor="let v of listeVente; index as i">
+<td>{{ i + 1 }}</td>
+<td>{{ v.medicamentId }}</td>
+<td>{{ v.quantity }}</td>
+<td>{{ v.date | date:'short' }}</td>
+<td class="text-end">{{ v.total | number:'1.2-2' }}</td>
+<td class="text-center">
+<div class="btn-group btn-group-sm" role="group">
+<a class="btn btn-outline-secondary" [routerLink]="['/ventes', v.id, 'edit']">Modifier</a>
+<button class="btn btn-outline-danger" (click)="deleteVente(v.id)">Supprimer</button>
+</div>
+</td>
+</tr>
+<tr *ngIf="listeVente.length === 0">
+<td colspan="6" class="text-center text-muted py-4">Aucune vente trouvée.</td>
+</tr>
+</tbody>
+</table>
+</div>
+
+
+<div class="d-flex justify-content-end mt-3">
+<small class="text-muted">Dernière mise à jour : {{ listeVente.length ? (listeVente[0].date | date:'short') : '-' }}</small>
+</div>
+</div>
+</div>
+</div>

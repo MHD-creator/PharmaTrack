@@ -1,0 +1,74 @@
+<!--
+  Template pour le formulaire de création d'une vente.
+  Utilise Bootstrap 5 pour le style et la mise en page.
+  Ce template est lié au composant VenteForm.
+-->
+<div class="container mt-5">
+  <div class="card shadow-sm">
+    <div class="card-header bg-primary text-white">
+      <h3 class="mb-0">Enregistrer une Nouvelle Vente</h3>
+    </div>
+    <div class="card-body">
+      <!-- Affiche un indicateur de chargement pendant les opérations asynchrones -->
+      <div *ngIf="loading" class="d-flex justify-content-center my-3">
+        <div class="spinner-border text-primary" role="status">
+          <span class="visually-hidden">Chargement...</span>
+        </div>
+      </div>
+
+      <!-- Le formulaire est masqué pendant le chargement pour éviter les interactions -->
+      <form [formGroup]="venteForm" (ngSubmit)="onSubmit()" *ngIf="!loading" novalidate>
+        <!-- Champ de sélection du médicament -->
+        <div class="mb-3">
+          <label for="medicament" class="form-label">Médicament</label>
+          <select id="medicament" class="form-select" formControlName="medicamentId" [class.is-invalid]="venteForm.get('medicamentId')?.invalid && venteForm.get('medicamentId')?.touched">
+            <option [ngValue]="null" disabled>Sélectionnez un médicament</option>
+            <option *ngFor="let med of medicaments" [value]="med.id">
+              {{ med.name }} - (Stock: {{ med.quantity }})
+            </option>
+          </select>
+          <!-- Message d'erreur pour la validation -->
+          <div *ngIf="venteForm.get('medicamentId')?.invalid && venteForm.get('medicamentId')?.touched" class="invalid-feedback">
+            Veuillez sélectionner un médicament.
+          </div>
+        </div>
+
+        <!-- Champ pour la quantité -->
+        <div class="mb-3">
+          <label for="quantity" class="form-label">Quantité</label>
+          <input type="number" id="quantity" class="form-control" formControlName="quantity" min="1" [class.is-invalid]="venteForm.get('quantity')?.invalid && venteForm.get('quantity')?.touched">
+          <!-- Messages d'erreur pour la validation -->
+          <div *ngIf="venteForm.get('quantity')?.touched && venteForm.get('quantity')?.errors" class="invalid-feedback">
+            <div *ngIf="venteForm.get('quantity')?.errors?.['required']">La quantité est requise.</div>
+            <div *ngIf="venteForm.get('quantity')?.errors?.['min']">La quantité doit être d'au moins 1.</div>
+          </div>
+        </div>
+
+        <!-- Champ pour la date -->
+        <div class="mb-3">
+          <label for="date" class="form-label">Date de la vente</label>
+          <input type="date" id="date" class="form-control" formControlName="date">
+        </div>
+
+        <!-- Champ pour le total (calculé automatiquement) -->
+        <div class="mb-3">
+          <label for="total" class="form-label">Total</label>
+          <div class="input-group">
+            <span class="input-group-text">FCFA</span>
+            <input type="number" id="total" class="form-control" formControlName="total" [readonly]="true">
+          </div>
+        </div>
+
+        <!-- Boutons d'action -->
+        <div class="d-flex justify-content-end gap-2 mt-4">
+          <button type="button" class="btn btn-secondary" (click)="cancel()">
+            Annuler
+          </button>
+          <button type="submit" class="btn btn-primary" [disabled]="venteForm.invalid || loading">
+            Enregistrer la Vente
+          </button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

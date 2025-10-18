@@ -1,0 +1,109 @@
+<div class="container py-4">
+  <div class="d-flex align-items-center justify-content-between mb-3">
+    <div>
+      <h2 class="mb-0">Médicaments</h2>
+      <small class="text-muted">Gestion des ventes · suppression · suivi des péremptions</small>
+    </div>
+
+    <div class="text-end">
+      <a class="btn btn-outline-primary me-2" routerLink="/new">
+        <i class="bi bi-plus-lg"></i> Ajouter
+      </a>
+      <button class="btn btn-secondary" (click)="loadMedicaments()" [disabled]="loading">
+        <i class="bi" [ngClass]="{ 'bi-arrow-repeat': loading, 'bi-arrow-clockwise': !loading }"></i>
+        Actualiser
+      </button>
+    </div>
+  </div>
+
+  <!-- Alerte faible stock -->
+  <div *ngIf="medicamentsFaibleStock.length > 0" class="mb-3">
+    <div class="alert alert-warning d-flex justify-content-between align-items-center mb-0">
+      <div>
+        <strong>{{ medicamentsFaibleStock.length }}</strong> médicament(s) en faible stock.
+      </div>
+      <div>
+        <button class="btn btn-sm btn-outline-warning" (click)="searchTerm='';">
+          Voir tous
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Barre de recherche -->
+  <div class="row mb-3">
+    <div class="col-md-6 col-sm-12 mb-2">
+      <div class="input-group">
+        <span class="input-group-text"><i class="bi bi-search"></i></span>
+        <input type="text"
+               class="form-control"
+               placeholder="Rechercher par nom, catégorie, ... "
+               [(ngModel)]="searchTerm">
+        <button *ngIf="searchTerm" class="btn btn-outline-secondary" (click)="searchTerm=''">Effacer</button>
+      </div>
+    </div>
+    <div class="col-md-6 text-md-end text-sm-start align-self-center">
+      <small class="text-muted">Résultats: <strong>{{ filteredMedicaments.length }}</strong></small>
+    </div>
+  </div>
+
+  <!-- tableau responsive -->
+  <div class="table-responsive shadow-sm rounded bg-white">
+    <table class="table table-hover mb-0 align-middle">
+      <thead class="table-light">
+        <tr>
+          <th>Nom</th>
+          <th>Catégorie</th>
+          <th class="text-center">Quantité</th>
+          <th class="text-center">Date péremption</th>
+          <th class="text-end">Prix</th>
+          <th class="text-center">Actions</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let med of filteredMedicaments; trackBy: trackById" [ngClass]="{ 'table-danger': isLowStock(med) }">
+          <td>
+            <div class="fw-semibold">{{ med.name }}</div>
+            <div class="text-muted small">ID: {{ med.id ?? '-' }}</div>
+          </td>
+          <td>{{ med.category || '-' }}</td>
+          <td class="text-center">
+            <span class="badge" [ngClass]="isLowStock(med) ? 'bg-danger' : 'bg-success'">
+              {{ med.quantity }}
+            </span>
+          </td>
+          <td class="text-center">
+            <small [title]="med.expiryDate">{{ med.expiryDate ? (med.expiryDate | date:'dd/MM/yyyy') : '-' }}</small>
+          </td>
+          <td class="text-end">{{ formatPrice(med.price) }}</td>
+          <td class="text-center">
+            <div class="btn-group btn-group-sm" role="group" aria-label="actions">
+              <a class="btn btn-outline-secondary" [routerLink]="['/medicaments/view', med.id]" title="Voir">
+                <i class="bi bi-eye"></i>
+              </a>
+              <a class="btn btn-outline-primary" [routerLink]="['/edit', med.id]" title="Modifier">
+                <i class="bi bi-pencil"></i>
+              </a>
+              <button class="btn btn-outline-danger" (click)="deleteMedicament(med.id)" title="Supprimer">
+                <i class="bi bi-trash"></i>
+              </button>
+            </div>
+          </td>
+        </tr>
+
+        <tr *ngIf="!filteredMedicaments || filteredMedicaments.length === 0">
+          <td colspan="6" class="text-center py-4 text-muted">
+            <i class="bi bi-info-circle me-2"></i>Aucun médicament trouvé.
+          </td>
+        </tr>
+      </tbody>
+    </table>
+  </div>
+
+  <div class="mt-3 d-flex justify-content-between align-items-center small text-muted">
+    <div>Dernière actualisation : <strong>{{ loading ? 'en cours...' : 'terminée' }}</strong></div>
+    <div>
+      <small>Vue: <strong>{{ filteredMedicaments.length }}</strong></small>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,19 @@
+:host {
+display: block;
+}
+
+
+.card {
+border: 0;
+border-radius: 0.75rem;
+}
+
+
+.table-hover tbody tr:hover {
+background-color: rgba(0,0,0,0.02);
+}
+
+
+.btn-primary {
+box-shadow: 0 6px 18px rgba(13,110,253,0.08);
+}

@@ -1,0 +1,191 @@
+<div class="container my-4">
+    <div class="row g-3">
+  
+    
+      <div class="col-12">
+        <div class="d-flex align-items-center justify-content-between">
+          <div>
+            <h2 class="mb-0">Tableau de bord</h2>
+            <small class="text-muted">Résumé en temps réel des médicaments et ventes</small>
+          </div>
+          <div class="d-flex gap-2">
+            <a class="btn btn-outline-primary" [routerLink]="['/medicaments']">Medicaments</a>
+            <a class="btn btn-primary" [routerLink]="['/ventes']">Ventes</a>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-12" *ngIf="loading">
+        <div class="alert alert-info mb-0">Chargement des données...</div>
+      </div>
+      <div class="col-12" *ngIf="error && !loading">
+        <div class="alert alert-danger mb-0">{{ error }}</div>
+      </div>
+  
+      <div class="col-lg-3 col-md-6" *ngIf="!loading">
+        <div class="card card-stats shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-muted small">Total médicaments</div>
+                <div class="h4 fw-bold">{{ totalMedicaments }}</div>
+              </div>
+              <div class="icon-circle bg-light">
+                <i class="bi bi-box-seam fs-3"></i>
+              </div>
+            </div>
+            <div class="mt-2 small text-muted">Valeur stock: <strong>{{ totalStockValue | number:'1.0-0' }} FCFA</strong></div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-lg-3 col-md-6" *ngIf="!loading">
+        <div class="card card-stats shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-muted small">Ventes (aujourd'hui)</div>
+                <div class="h4 fw-bold">{{ countVentesToday }} ventes</div>
+              </div>
+              <div class="icon-circle bg-light">
+                <i class="bi bi-cart-check fs-3"></i>
+              </div>
+            </div>
+            <div class="mt-2 small text-muted">Chiffre: <strong>{{ totalVentesToday | number:'1.0-0' }} FCFA</strong></div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-lg-3 col-md-6" *ngIf="!loading">
+        <div class="card card-stats shadow-sm">
+          <div class="card-body">
+            <div class="d-flex align-items-center justify-content-between">
+              <div>
+                <div class="text-muted small">Faible stock</div>
+                <div class="h4 fw-bold text-danger">{{ lowStockMedicaments.length }}</div>
+              </div>
+              <div class="icon-circle bg-light">
+                <i class="bi bi-exclamation-triangle fs-3"></i>
+              </div>
+            </div>
+            <div class="mt-2 small text-muted">Pourcentage: <strong>{{ percentLowStock }}%</strong></div>
+          </div>
+        </div>
+      </div>
+  
+      <div class="col-lg-3 col-md-6" *ngIf="!loading">
+        <div class="card card-stats shadow-sm">
+          <div class="card-body d-flex align-items-center justify-content-between">
+            <div>
+              <div class="text-muted small">Actions rapides</div>
+              <div class="mt-2">
+                <a class="btn btn-sm btn-outline-success me-1" [routerLink]="['/new/medicaments']">+ Ajouter médicament</a>
+                <a class="btn btn-sm btn-outline-primary" [routerLink]="['/new/vente']">+ Nouvelle vente</a>
+              </div>
+            </div>
+            <div class="icon-circle bg-light">
+              <i class="bi bi-speedometer2 fs-3"></i>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- graphique -->
+      <div class="col-lg-8" *ngIf="!loading">
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <div class="d-flex justify-content-between align-items-center mb-2">
+              <div>
+                <h5 class="mb-0">Ventes — dernière semaine</h5>
+                <small class="text-muted">Montant par jour</small>
+              </div>
+              <div class="small text-muted">
+                Total semaine:
+                <strong>{{ totalVentesSemaine | number:'1.0-0' }} FCFA</strong>
+              </div>
+            </div>
+  
+            <div class="chart-wrap mt-3">
+              <!-- Bar chart responsive (CSS) -->
+              <div class="d-flex align-items-end gap-3 mt-3 chart-bars">
+                <div *ngFor="let p of ventesSemaine" class="chart-bar">
+                  <div class="bar" [style.height.%]="barHeightPercent(p.total)" [title]="p.total + ' FCFA'"></div>
+                  <div class="text-center small mt-2">{{ p.jour }}</div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+  
+      <!-- faible stock + ventes du jour -->
+      <div class="col-lg-4" *ngIf="!loading">
+        <div class="card shadow-sm mb-3">
+          <div class="card-body">
+            <h6 class="card-title mb-2">Produits en faible stock</h6>
+  
+            <ul class="list-group list-group-flush">
+              <li *ngFor="let m of lowStockMedicaments" class="list-group-item d-flex justify-content-between align-items-center">
+                <div>
+                  <div class="fw-semibold">{{ m.name }}</div>
+                  <small class="text-muted">{{ m.category || '—' }}</small>
+                </div>
+                <div class="text-end">
+                  <div class="text-danger fw-bold">{{ m.quantity }}</div>
+                  <small class="text-muted">en stock</small>
+                </div>
+              </li>
+  
+              <li *ngIf="lowStockMedicaments.length === 0" class="list-group-item text-center text-muted">
+                Aucun produit en faible stock
+              </li>
+            </ul>
+  
+          </div>
+        </div>
+  
+        <div class="card shadow-sm">
+          <div class="card-body">
+            <h6 class="card-title mb-2">Résumé des ventes (aujourd'hui)</h6>
+  
+            <div *ngIf="ventesToday.length; else noSales">
+              <ul class="list-unstyled">
+                <li *ngFor="let v of ventesToday" class="d-flex justify-content-between align-items-center py-2 border-bottom">
+                  <div>
+                    <div class="small text-muted">{{ medicamentNameById(v.medicamentId) }}</div>
+                    <div class="fw-semibold">Qté: {{ v.quantity }}</div>
+                  </div>
+                  <div class="text-end">
+                    <div class="fw-bold">{{ v.total | number:'1.0-0' }} FCFA</div>
+                    <small class="text-muted">{{ v.date | date:'short' }}</small>
+                  </div>
+                </li>
+              </ul>
+  
+              <div class="mt-3 d-flex justify-content-between">
+                <div>Total ventes</div>
+                <div class="fw-bold">{{ totalVentesToday | number:'1.0-0' }} FCFA</div>
+              </div>
+            </div>
+  
+            <ng-template #noSales>
+              <div class="text-center text-muted py-3">Aucune vente aujourd'hui</div>
+            </ng-template>
+  
+          </div>
+        </div>
+      </div>
+  
+      <!-- footer -->
+      <div class="col-12" *ngIf="!loading">
+        <div class="card border-0 bg-transparent small text-muted">
+          <div class="card-body p-0 d-flex justify-content-between">
+            <div>Dernière mise à jour : {{ todayISOLocal() }}</div>
+            <div>Prototype — données live depuis les services</div>
+          </div>
+        </div>
+      </div>
+  
+    </div>
+  </div>
+  
