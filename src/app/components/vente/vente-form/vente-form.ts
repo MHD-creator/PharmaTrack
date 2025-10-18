@@ -104,11 +104,11 @@ export class VenteForm implements OnInit{
       medicamentId: medicamentId,
       quantity: quantity,
       date: String(raw.date),
-      total: Number(raw.total)
+      total: medicament.price * medicament.quantity
     };
 
     this.loading = true;
-
+    delete venteToCreate.id;
     this.venteService.addVente(venteToCreate).pipe(
       switchMap((createdVente: any) => {
         const createdId = (createdVente && createdVente.id) ? createdVente.id : null;

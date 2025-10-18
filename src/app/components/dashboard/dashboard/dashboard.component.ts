@@ -4,9 +4,10 @@ import { RouterLink } from '@angular/router';
 import { Subject, forkJoin, takeUntil } from 'rxjs';
 import { MedicamentsService } from '../../../services/medicament/medicament';
 import { VenteService } from '../../../services/vente/vente-service';
+import { AuthService } from '../../../services/auth/auth.service';
 
 interface Vente {
-  id: number;
+  id?: number;
   medicamentId: number;
   quantity: number;
   date: string;
@@ -44,7 +45,8 @@ export class DashboardComponent implements OnInit, OnDestroy {
 
   constructor(
     private medicamentService: MedicamentsService,
-    private venteService: VenteService
+    private venteService: VenteService, 
+    private authService: AuthService
   ) {}
 
   ngOnInit(): void {
@@ -80,6 +82,10 @@ export class DashboardComponent implements OnInit, OnDestroy {
           this.loading = false;
         }
       });
+  }
+  //logou
+  logout(): void{
+    this.authService.logout();
   }
 
 //getters

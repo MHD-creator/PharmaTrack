@@ -1,27 +1,30 @@
 <div class="container my-4">
     <div class="row g-3">
-  
-    
+
       <div class="col-12">
         <div class="d-flex align-items-center justify-content-between">
           <div>
             <h2 class="mb-0">Tableau de bord</h2>
             <small class="text-muted">Résumé en temps réel des médicaments et ventes</small>
           </div>
-          <div class="d-flex gap-2">
+          <div class="d-flex gap-2 align-items-center">
+            <!-- Bouton de déconnexion ajouté ici -->
+            <button class="btn btn-outline-danger" (click)="logout()">
+              <i class="bi bi-box-arrow-right me-1"></i> Déconnexion
+            </button>
             <a class="btn btn-outline-primary" [routerLink]="['/medicaments']">Medicaments</a>
             <a class="btn btn-primary" [routerLink]="['/ventes']">Ventes</a>
           </div>
         </div>
       </div>
-  
+
       <div class="col-12" *ngIf="loading">
         <div class="alert alert-info mb-0">Chargement des données...</div>
       </div>
       <div class="col-12" *ngIf="error && !loading">
         <div class="alert alert-danger mb-0">{{ error }}</div>
       </div>
-  
+
       <div class="col-lg-3 col-md-6" *ngIf="!loading">
         <div class="card card-stats shadow-sm">
           <div class="card-body">
@@ -38,7 +41,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="col-lg-3 col-md-6" *ngIf="!loading">
         <div class="card card-stats shadow-sm">
           <div class="card-body">
@@ -55,7 +58,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="col-lg-3 col-md-6" *ngIf="!loading">
         <div class="card card-stats shadow-sm">
           <div class="card-body">
@@ -72,7 +75,7 @@
           </div>
         </div>
       </div>
-  
+
       <div class="col-lg-3 col-md-6" *ngIf="!loading">
         <div class="card card-stats shadow-sm">
           <div class="card-body d-flex align-items-center justify-content-between">
@@ -89,7 +92,7 @@
           </div>
         </div>
       </div>
-  
+
       <!-- graphique -->
       <div class="col-lg-8" *ngIf="!loading">
         <div class="card shadow-sm">
@@ -104,7 +107,7 @@
                 <strong>{{ totalVentesSemaine | number:'1.0-0' }} FCFA</strong>
               </div>
             </div>
-  
+
             <div class="chart-wrap mt-3">
               <!-- Bar chart responsive (CSS) -->
               <div class="d-flex align-items-end gap-3 mt-3 chart-bars">
@@ -117,13 +120,13 @@
           </div>
         </div>
       </div>
-  
+
       <!-- faible stock + ventes du jour -->
       <div class="col-lg-4" *ngIf="!loading">
         <div class="card shadow-sm mb-3">
           <div class="card-body">
             <h6 class="card-title mb-2">Produits en faible stock</h6>
-  
+
             <ul class="list-group list-group-flush">
               <li *ngFor="let m of lowStockMedicaments" class="list-group-item d-flex justify-content-between align-items-center">
                 <div>
@@ -135,19 +138,19 @@
                   <small class="text-muted">en stock</small>
                 </div>
               </li>
-  
+
               <li *ngIf="lowStockMedicaments.length === 0" class="list-group-item text-center text-muted">
                 Aucun produit en faible stock
               </li>
             </ul>
-  
+
           </div>
         </div>
-  
+
         <div class="card shadow-sm">
           <div class="card-body">
             <h6 class="card-title mb-2">Résumé des ventes (aujourd'hui)</h6>
-  
+
             <div *ngIf="ventesToday.length; else noSales">
               <ul class="list-unstyled">
                 <li *ngFor="let v of ventesToday" class="d-flex justify-content-between align-items-center py-2 border-bottom">
@@ -161,21 +164,21 @@
                   </div>
                 </li>
               </ul>
-  
+
               <div class="mt-3 d-flex justify-content-between">
                 <div>Total ventes</div>
                 <div class="fw-bold">{{ totalVentesToday | number:'1.0-0' }} FCFA</div>
               </div>
             </div>
-  
+
             <ng-template #noSales>
               <div class="text-center text-muted py-3">Aucune vente aujourd'hui</div>
             </ng-template>
-  
+
           </div>
         </div>
       </div>
-  
+
       <!-- footer -->
       <div class="col-12" *ngIf="!loading">
         <div class="card border-0 bg-transparent small text-muted">
@@ -185,7 +188,6 @@
           </div>
         </div>
       </div>
-  
+
     </div>
   </div>
-  

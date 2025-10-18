@@ -13,7 +13,7 @@
       "name": "Vitamine C 1000mg",
       "category": "Complément",
       "price": 300,
-      "quantity": 80,
+      "quantity": 79,
       "expiryDate": "2027-03-15"
     },
     {
@@ -149,11 +149,18 @@
       "total": 0
     },
     {
-      "id": 0,
+      "id": "0",
       "medicamentId": "3",
       "quantity": 1,
       "date": "2025-10-18",
       "total": 0
+    },
+    {
+      "id": "7199",
+      "medicamentId": "4",
+      "quantity": 1,
+      "date": "2025-10-18",
+      "total": 24000
     }
   ],
   "users": [

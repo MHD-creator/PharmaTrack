@@ -48,7 +48,7 @@ export class MedicamentForm implements OnInit{
                 ...medicamentToEdit,
                 dateExpiration: formattedDate 
             });
-        }
+          }
       });
     }
 

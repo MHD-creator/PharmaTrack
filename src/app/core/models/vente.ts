@@ -1,5 +1,5 @@
 export interface Vente {
-    id: number;
+    id?: number;
     medicamentId: number;
     quantity: number;
     date: string;
