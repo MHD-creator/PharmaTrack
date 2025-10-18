@@ -11,6 +11,7 @@
 <img width="1906" height="856" alt="formulaire ajout medicament" src="https://github.com/user-attachments/assets/fa87302b-af5a-470c-b2e4-0ea48fade0ba" />
 
 <img width="1908" height="887" alt="dashboard" src="https://github.com/user-attachments/assets/f6f7534e-b12a-4f37-8b85-e42add1019be" />
+
 # 1. Présentation générale
 Titre du projet : PharmaTrack Burkina
 Technologie principale : Angular
