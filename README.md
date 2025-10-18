@@ -14,29 +14,7 @@ Intégrer une authentification simplifiée et une API REST factice pour la simul
 4. Architecture du système
 3.1. Structure du projet Angular
 
-Le projet est organisé selon la structure standard Angular :
-src/
- ├── app/
- │    ├── components/
- │    │     ├── dashboard/
- │    │     ├── medicaments/
- │    │     ├── ventes/
- │    │     ├── login/
- │    ├── services/
- │    │     ├── medicament.service.ts
- │    │     ├── vente.service.ts
- │    │     └── auth.service.ts
- │    ├── guards/
- │    ├── interceptors/
- │    ├── models/
- │    ├── app-routing.module.ts
- │    ├── app.component.ts
- │    └── app.module.ts
- ├
- └── environments/
-
 3.2. Technologies utilisées
-
 Frontend : Angular 18, TypeScript, HTML5, CSS3, Bootstrap 5
 Backend simulé : json-server (API REST factice)
 Outils : Visual Studio Code, Node.js, GitHub
