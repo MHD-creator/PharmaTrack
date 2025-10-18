@@ -1,3 +1,4 @@
+#PharmaTrack
 1. Présentation générale
 Titre du projet : PharmaTrack Burkina
 Technologie principale : Angular
@@ -59,3 +60,16 @@ Configuration via json-server avec trois ressources principales :
 /medicaments → gestion des médicaments
 /ventes → enregistrement des ventes
 /users → authentification
+
+Ecrans: 
+<img width="1885" height="878" alt="Capture d'écran 2025-10-18 173909" src="https://github.com/user-attachments/assets/c49fd592-db48-4dee-b0f0-55a552262900" />
+
+<img width="1788" height="902" alt="liste vente" src="https://github.com/user-attachments/assets/6c3b22d9-3f64-422d-9b21-8dad437cdb88" />
+
+<img width="1867" height="873" alt="liste medicament" src="https://github.com/user-attachments/assets/fc1e77af-a99c-46bc-82dd-4d8a0d3861b1" />
+
+<img width="1773" height="790" alt="formulaire ajout vente" src="https://github.com/user-attachments/assets/d919166f-6164-42fe-b7e4-11f2596c24e0" />
+
+<img width="1906" height="856" alt="formulaire ajout medicament" src="https://github.com/user-attachments/assets/fa87302b-af5a-470c-b2e4-0ea48fade0ba" />
+
+<img width="1908" height="887" alt="dashboard" src="https://github.com/user-attachments/assets/f6f7534e-b12a-4f37-8b85-e42add1019be" />
