@@ -1,59 +1,83 @@
-# PharmaTrack
+1. Présentation générale
+Titre du projet : PharmaTrack Burkina
+Technologie principale : Angular
+Contexte : Dans les zones rurales du Burkina Faso, de nombreux dépôts pharmaceutiques ne disposent pas d’outils numériques pour la gestion du stock et des ventes. PharmaTrack a été conçu pour offrir une solution simple, rapide et accessible depuis un navigateur web.
+L’application permet de gérer efficacement les médicaments, les ventes quotidiennes, les alertes de rupture et les statistiques, contribuant ainsi à une meilleure organisation et à une réduction des pertes liées à la mauvaise gestion des stocks.
 
-This project was generated using [Angular CLI](https://github.com/angular/angular-cli) version 20.3.5.
+2. Objectifs du projet
+Mettre en place une application web Angular ergonomique et performante.
+Permettre la gestion complète du stock de médicaments (CRUD).
+Enregistrer et suivre les ventes quotidiennes.
+Afficher un tableau de bord avec les statistiques clés.
+Intégrer une authentification simplifiée et une API REST factice pour la simulation des échanges.
 
-## Development server
+4. Architecture du système
+3.1. Structure du projet Angular
 
-To start a local development server, run:
+Le projet est organisé selon la structure standard Angular :
+src/
+ ├── app/
+ │    ├── components/
+ │    │     ├── dashboard/
+ │    │     ├── medicaments/
+ │    │     ├── ventes/
+ │    │     ├── login/
+ │    ├── services/
+ │    │     ├── medicament.service.ts
+ │    │     ├── vente.service.ts
+ │    │     └── auth.service.ts
+ │    ├── guards/
+ │    ├── interceptors/
+ │    ├── models/
+ │    ├── app-routing.module.ts
+ │    ├── app.component.ts
+ │    └── app.module.ts
+ ├
+ └── environments/
 
-```bash
-ng serve
-```
+3.2. Technologies utilisées
 
-Once the server is running, open your browser and navigate to `http://localhost:4200/`. The application will automatically reload whenever you modify any of the source files.
+Frontend : Angular 18, TypeScript, HTML5, CSS3, Bootstrap 5
+Backend simulé : json-server (API REST factice)
+Outils : Visual Studio Code, Node.js, GitHub
 
-## Code scaffolding
+4. Fonctionnalités réalisées
+4.1. Gestion des médicaments
 
-Angular CLI includes powerful code scaffolding tools. To generate a new component, run:
+Liste complète des médicaments avec tri et recherche.
+Ajout, modification et suppression (CRUD complet).
+Validation réactive : nom obligatoire, prix > 0, date d’expiration valide.
+Alerte automatique lorsque le stock d’un médicament est inférieur à 10 unités.
 
-```bash
-ng generate component component-name
-```
+4.2. Gestion des ventes
+Enregistrement d’une vente avec le médicament, la quantité et la date.
+Mise à jour automatique du stock après chaque vente.
+Calcul du chiffre d’affaires journalier.
+Historique des ventes
 
-For a complete list of available schematics (such as `components`, `directives`, or `pipes`), run:
+4.3. Tableau de bord et statistiques
 
-```bash
-ng generate --help
-```
+Page d’accueil affichant :
+  Médicaments proches de la rupture
+  Chiffre d’affaires du jour
+  Nombre de ventes journalières
+  Graphique (via Chart.js ou Recharts) représentant les ventes par semaine ou par mois.
 
-## Building
+4.4. Authentification simplifiée
 
-To build the project run:
+Page de connexion avec rôle Admin / Utilisateur.
+Utilisation d’un AuthGuard pour protéger l’accès à l’administration.
+Un interceptor HTTP ajoute un token factice à chaque requête sortante.
 
-```bash
-ng build
-```
+4.5. Formulaires Angular
 
-This will compile your project and store the build artifacts in the `dist/` directory. By default, the production build optimizes your application for performance and speed.
+Formulaire réactif : ajout/modification de médicament.
+Formulaire template-driven : recherche rapide dans la liste.
 
-## Running unit tests
+4.6. API REST factice
 
-To execute unit tests with the [Karma](https://karma-runner.github.io) test runner, use the following command:
+Configuration via json-server avec trois ressources principales :
 
-```bash
-ng test
-```
-
-## Running end-to-end tests
-
-For end-to-end (e2e) testing, run:
-
-```bash
-ng e2e
-```
-
-Angular CLI does not come with an end-to-end testing framework by default. You can choose one that suits your needs.
-
-## Additional Resources
-
-For more information on using the Angular CLI, including detailed command references, visit the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+/medicaments → gestion des médicaments
+/ventes → enregistrement des ventes
+/users → authentification
